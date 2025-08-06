@@ -1,29 +1,30 @@
-# Step 1: Build the Storybook static site
-FROM node:20-alpine AS builder
+# Step 1: Build the React portfolio application
+FROM node:18-alpine AS builder
 
 # Set working directory as specified in requirements
-WORKDIR /wang_yue_ui_garden_build_checks
+WORKDIR /wang_yue_final_site
 
+# Copy package files
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
 
+# Install dependencies without husky
+RUN npm install --legacy-peer-deps --ignore-scripts
+
+# Copy all source files
 COPY . .
 
-# Run code quality checks before building (comment out for now due to lint issues)
-# RUN npm run lint
-# RUN npm run format:check
-# RUN npm test
-RUN npm run build-storybook
+# Build the React application
+RUN npm run build
 
-# Step 2: Serve Storybook static files with Nginx
+# Step 2: Serve portfolio site with Nginx
 FROM nginx:alpine
 
 # Copy built files to nginx directory
-COPY --from=builder /wang_yue_ui_garden_build_checks/storybook-static /usr/share/nginx/html
+COPY --from=builder /wang_yue_final_site/dist /usr/share/nginx/html
 
-# Configure nginx to serve on port 8018
+# Configure nginx to serve on port 5575
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 8018
+EXPOSE 5575
 
 CMD ["nginx", "-g", "daemon off;"]
