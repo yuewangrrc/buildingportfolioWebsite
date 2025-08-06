@@ -1,0 +1,12 @@
+node_modules
+dist
+storybook-static
+build
+coverage
+*.log
+*.md
+package-lock.json
+yarn.lock
+.DS_Store
+.vscode
+.idea
