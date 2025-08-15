@@ -7,11 +7,14 @@ WORKDIR /wang_yue_final_site
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies without husky
-RUN npm install --legacy-peer-deps --ignore-scripts
+# Install dependencies (allow postinstall to run so esbuild downloads correct binary)
+RUN npm install --legacy-peer-deps
 
 # Copy all source files
 COPY . .
+
+# Ensure esbuild native binary matches JS wrapper version for alpine after sources are in place
+RUN npm rebuild esbuild && node -e "console.log('esbuild version:', require('esbuild/package.json').version)"
 
 # Build the React application
 RUN npm run build

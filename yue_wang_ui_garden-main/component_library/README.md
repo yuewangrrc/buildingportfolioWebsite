@@ -49,7 +49,7 @@ The portfolio website includes the following sections:
 
 ### 1. Basic Information
 - Name: Yue Wang
-- Title: Full-Stack Developer & Computer Science Student
+- Title: Full-Stack Developer & Full Stack Web Development Student
 - Institution: Red River College Polytechnic
 
 ### 2. Work Portfolio
@@ -140,6 +140,6 @@ docker rmi wang_yue_coding_assignment14
 ## Author
 
 **Yue Wang**  
-Computer Science Student  
+Full Stack Web Development Student  
 Red River College Polytechnic
 
