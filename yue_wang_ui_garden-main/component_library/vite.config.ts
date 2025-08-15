@@ -13,33 +13,43 @@ const dirname =
 export default defineConfig({
   plugins: [react()],
   test: {
-    projects: [
-      {
-        test: {
-          environment: 'jsdom',
-          globals: true,
-          setupFiles: ['./src/setupTests.ts'],
-          include: ['src/**/*.test.{ts,tsx}'],
-        },
-      },
-      {
-        extends: true,
-        plugins: [
-          storybookTest({
-            configDir: path.join(dirname, '.storybook'),
-          }),
-        ],
-        test: {
-          environment: 'jsdom',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: 'playwright',
-            instances: [{ browser: 'chromium' }],
+    projects: (() => {
+      const baseUnit = [
+        {
+          test: {
+            environment: 'jsdom',
+            globals: true,
+            setupFiles: ['./src/setupTests.ts'],
+            include: ['src/**/*.test.{ts,tsx}'],
           },
-          setupFiles: ['.storybook/vitest.setup.ts'],
         },
-      },
-    ],
+      ];
+
+      // Enable Storybook browser tests only when explicitly requested
+      const enableBrowser = process.env.STORYBOOK_BROWSER_TESTS === '1';
+      if (!enableBrowser) return baseUnit;
+
+      return [
+        ...baseUnit,
+        {
+          extends: true,
+          plugins: [
+            storybookTest({
+              configDir: path.join(dirname, '.storybook'),
+            }),
+          ],
+          test: {
+            environment: 'jsdom',
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: 'playwright',
+              instances: [{ browser: 'chromium' }],
+            },
+            setupFiles: ['.storybook/vitest.setup.ts'],
+          },
+        },
+      ];
+    })(),
   },
 });

@@ -4,7 +4,7 @@ import type { CardProps } from './Card.types';
 
 const Wrapper = styled.div<{ disabled?: boolean; backgroundColor?: string }>`
   background-color: ${({ backgroundColor, disabled }) =>
-    disabled ? '#e5e7eb' : backgroundColor || 'var(--surface)'};
+    disabled ? '#ccc' : backgroundColor || 'var(--surface)'};
   border-radius: var(--radius);
   padding: 18px;
   border: 1px solid #eef2f7;

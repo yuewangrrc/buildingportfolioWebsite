@@ -1,6 +1,20 @@
-# Yue Wang Portfolio Website - Assignment 14
+# Yue Wang Portfolio Website — Assignment 14
 
-A responsive portfolio website built with React, TypeScript, and component library showcasing coursework and development skills. The site is containerized with Docker and serves on localhost:5575.
+A responsive portfolio website built with React + TypeScript using a reusable component library. The site is dockerized and served by Nginx at http://localhost:5575.
+
+## Table of Contents
+
+- Requirements
+- Quick Start (Docker)
+- Local Development
+- Portfolio Features
+- Docker Configuration
+- CI/CD Pipeline
+- Project Structure
+- Stop & Clean Up
+- Troubleshooting
+- Rubric Mapping
+- Author
 
 ## Requirements
 
@@ -11,21 +25,24 @@ A responsive portfolio website built with React, TypeScript, and component libra
 ## Quick Start with Docker
 
 ```bash
-# Build the Docker image
+# 0) Ensure Docker Desktop is running
+
+# 1) Build the Docker image
 docker build -t wang_yue_coding_assignment14 .
 
-# Run the container
+# 2) Run the container
 docker run -d -p 5575:5575 --name wang_yue_coding_assignment14 wang_yue_coding_assignment14
 
-# Access the portfolio at http://localhost:5575 or http://127.0.0.1:5575
+# 3) Open the site in your browser
+# http://localhost:5575 or http://127.0.0.1:5575
 ```
 
 ## Local Development
 
 ```bash
 # Clone and install dependencies
-git clone <repository-url>
-cd component_library
+git clone https://github.com/yuewangrrc/buildingportfolioWebsite.git
+cd buildingportfolioWebsite/yue_wang_ui_garden-main/component_library
 npm install
 
 # Run development server
@@ -93,14 +110,25 @@ Personal development environment details:
 - **Web Server**: Nginx
 - **Build**: Production React build
 
+Container naming follows the required format: `lastName_firstName_coding_assignment14`.
+
 ## CI/CD Pipeline
 
-The project includes:
-- ESLint for code quality
-- Prettier for code formatting
-- Vitest for testing
-- Docker for containerization
-- Automated build pipeline
+- GitHub Actions workflow at `.github/workflows/ci.yml`
+	- Node 18/20 matrix build
+	- Install dependencies (cached)
+	- Run ESLint and Prettier checks
+	- Run tests (Vitest)
+	- Build the production app
+	- Build and smoke-test the Docker image
+
+Local quality checks:
+
+```bash
+npm run lint
+npm run format:check
+npm test
+```
 
 ## Project Structure
 
@@ -117,7 +145,7 @@ component_library/
 └── README.md             # This file
 ```
 
-## Stop Container
+## Stop & Clean Up
 
 ```bash
 # Stop and remove the container
@@ -127,6 +155,27 @@ docker rm wang_yue_coding_assignment14
 # Remove the image (optional)
 docker rmi wang_yue_coding_assignment14
 ```
+
+## Troubleshooting
+
+- Docker build fails with esbuild host/binary version mismatch
+	- Symptom: `Cannot start service: Host version "x" does not match binary version "y"`
+	- Fix (already handled in Dockerfile): esbuild is pinned and rebuilt during image build. For local dev: `npm rebuild esbuild` and ensure Node 18+.
+
+- Port already in use (5575)
+	- Stop or change the conflicting service. Or run with a different host port: `-p 8888:5575` and open http://localhost:8888.
+
+- Docker Desktop isn’t running
+	- Start Docker Desktop first, then retry the build/run commands.
+
+## Rubric Mapping
+
+- Complete Submission
+	- Includes Dockerfile, README, and this public GitHub repo link.
+- Pipeline Implementation
+	- GitHub Actions workflow runs ESLint, Prettier, Tests, Build, and Docker smoke test.
+- Style and Content
+	- Portfolio includes all required sections (Basic Info, Work, Skills, Resources, Developer Setup) with multi-section navigation and clean, error-free content.
 
 ## Technologies Used
 

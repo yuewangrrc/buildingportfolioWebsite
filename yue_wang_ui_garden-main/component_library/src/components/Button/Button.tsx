@@ -14,14 +14,14 @@ const StyledButton = styled.button.withConfig({
   border-radius: 999px;
   color: ${({ backgroundColor }) => (backgroundColor && backgroundColor.startsWith('#e2e8f0') ? '#0f172a' : '#ffffff')};
   background-color: ${({ backgroundColor, disabled }) =>
-    disabled ? '#cbd5e1' : backgroundColor || 'var(--primary)'};
+    disabled ? '#ccc' : backgroundColor || 'var(--primary)'};
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
   transition: background-color .2s ease, box-shadow .2s ease, transform .06s ease;
 
   &:hover {
     background-color: ${({ backgroundColor, disabled }) =>
-      disabled ? '#cbd5e1' : (backgroundColor && backgroundColor !== '#e2e8f0' ? 'var(--primary-600)' : '#dbe3ea')};
+      disabled ? '#ccc' : (backgroundColor && backgroundColor !== '#e2e8f0' ? 'var(--primary-600)' : '#dbe3ea')};
     box-shadow: var(--shadow-sm);
   }
 

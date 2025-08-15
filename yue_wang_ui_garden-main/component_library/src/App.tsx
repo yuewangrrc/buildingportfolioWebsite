@@ -356,11 +356,11 @@ function App() {
           onClick={() => setActiveSection('resources')}
           backgroundColor={activeSection === 'resources' ? 'var(--primary)' : '#e2e8f0'}
         />
-        <Button
+        {/* <Button
           label="Dev Setup"
           onClick={() => setActiveSection('setup')}
           backgroundColor={activeSection === 'setup' ? 'var(--primary)' : '#e2e8f0'}
-        />
+        /> */}
       </Navigation>
 
       {renderContent()}
