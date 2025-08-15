@@ -7,20 +7,34 @@ const StyledButton = styled.button.withConfig({
   backgroundColor?: string;
   disabled?: boolean;
 }>`
-  padding: 10px 20px;
-  font-size: 16px;
-
-  border: none;
-  border-radius: 4px;
-  color: white;
+  padding: 10px 18px;
+  font-size: 15px;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: ${({ backgroundColor }) => (backgroundColor && backgroundColor.startsWith('#e2e8f0') ? '#0f172a' : '#ffffff')};
   background-color: ${({ backgroundColor, disabled }) =>
-    disabled ? '#ccc' : backgroundColor || '#007BFF'};
+    disabled ? '#cbd5e1' : backgroundColor || 'var(--primary)'};
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
-  transition: background-color 0.3s ease;
+  transition: background-color .2s ease, box-shadow .2s ease, transform .06s ease;
+
+  &:hover {
+    background-color: ${({ backgroundColor, disabled }) =>
+      disabled ? '#cbd5e1' : (backgroundColor && backgroundColor !== '#e2e8f0' ? 'var(--primary-600)' : '#dbe3ea')};
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--ring);
+  }
 
   @media (max-width: 600px) {
-    padding: 8px 16px;
+    padding: 9px 16px;
     font-size: 14px;
   }
 `;

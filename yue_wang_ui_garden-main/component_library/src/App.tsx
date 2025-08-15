@@ -8,55 +8,65 @@ import './App.css';
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
+  padding: 24px 16px 60px;
 `;
 
 const Header = styled.header`
+  position: relative;
   text-align: center;
-  padding: 40px 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 10px;
-  margin-bottom: 40px;
+  padding: 56px 24px;
+  color: #0f172a;
+  border-radius: var(--radius);
+  margin-bottom: 36px;
+  background: linear-gradient(135deg, #e9f1ff 0%, #e5fbf7 100%);
+  box-shadow: var(--shadow-sm);
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 40px;
+    letter-spacing: 0.2px;
+  }
 `;
 
 const Navigation = styled.nav`
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 12px;
+  margin: 24px auto 36px;
   flex-wrap: wrap;
 `;
 
 const Section = styled.section`
-  margin-bottom: 60px;
+  margin-bottom: 56px;
 `;
 
 const SectionTitle = styled.h2`
-  color: #333;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 10px 0;
+  margin: 0 0 22px;
+  border-bottom: 3px solid var(--primary);
 `;
 
 const WorkGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  margin-bottom: 30px;
+  gap: 22px;
+  margin-bottom: 22px;
 `;
 
 const SkillsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 16px;
 `;
 
 const ResourcesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 16px;
 `;
 
 const TechList = styled.ul`
@@ -64,14 +74,16 @@ const TechList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 `;
 
 const TechItem = styled.li`
-  background: #f0f0f0;
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-size: 14px;
+  background: #f1f5f9; /* slate-100 */
+  color: #0f172a;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
 `;
 
 function App() {
@@ -82,21 +94,21 @@ function App() {
       title: "Component Library",
       description: "A comprehensive React component library built with TypeScript, Styled Components, and Storybook. Features reusable components like buttons, cards, tables, and forms with comprehensive testing and documentation.",
       image: "📚",
-      link: "https://github.com/yuewangrrc/component-library",
+      link: "https://github.com/yuewangrrc/yue_wang_assignment12_react_component",
       techStack: ["React", "TypeScript", "Styled Components", "Storybook", "Vitest", "ESLint"]
     },
     {
       title: "CI/CD Pipeline Project",
       description: "Implemented continuous integration and delivery pipeline with automated testing, linting, and deployment using GitHub Actions and Docker containerization.",
       image: "🚀",
-      link: "https://github.com/yuewangrrc/cicd-project",
+      link: "https://github.com/yuewangrrc/assignment13_ui_garden_build_checks",
       techStack: ["Docker", "GitHub Actions", "CI/CD", "Nginx", "Automated Testing"]
     },
     {
       title: "Portfolio Website",
       description: "This responsive portfolio website showcasing my development skills and projects, built with React and containerized with Docker for deployment.",
       image: "💼",
-      link: "https://github.com/yuewangrrc/portfolio",
+      link: "https://github.com/yuewangrrc/buildingportfolioWebsite",
       techStack: ["React", "TypeScript", "Docker", "Responsive Design", "Component Library"]
     }
   ];
@@ -174,11 +186,9 @@ function App() {
               content="Full-Stack Developer & Computer Science Student"
               footer="Red River College Polytechnic"
             />
-            <Text>
-              I am a passionate developer currently studying at Red River College Polytechnic. 
-              I specialize in building modern web applications using React, TypeScript, and component-driven development. 
-              My focus is on creating maintainable, tested, and well-documented code with strong CI/CD practices.
-            </Text>
+            <Text content="I am a passionate developer currently studying at Red River College Polytechnic." />
+            <Text content="I specialize in building modern web applications using React, TypeScript, and component-driven development." />
+            <Text content="My focus is on creating maintainable, tested, and well-documented code with strong CI/CD practices." />
           </Section>
         );
       
@@ -319,38 +329,37 @@ function App() {
   return (
     <Container>
       <Header>
-        <h1>Yue Wang</h1>
-        <Text style={{ fontSize: '18px', margin: '10px 0' }}>
-          Full-Stack Developer | Computer Science Student
+        <h1>Yue(Ada) Wang</h1>
+        <Text style={{ fontSize: '18px', margin: '10px 0' }} content='Winnipeg, Manitoba | Full-Stack Developer | adawang6688@gmail.com | 204-963-6688'>
         </Text>
-        <Text>Red River College Polytechnic</Text>
+        <Text content='linkedin.com/in/can-ada-wang/'></Text>
       </Header>
 
       <Navigation>
         <Button
           label="About"
           onClick={() => setActiveSection('about')}
-          backgroundColor={activeSection === 'about' ? '#667eea' : '#ccc'}
+          backgroundColor={activeSection === 'about' ? 'var(--primary)' : '#e2e8f0'}
         />
         <Button
           label="Work"
           onClick={() => setActiveSection('work')}
-          backgroundColor={activeSection === 'work' ? '#667eea' : '#ccc'}
+          backgroundColor={activeSection === 'work' ? 'var(--primary)' : '#e2e8f0'}
         />
         <Button
           label="Skills"
           onClick={() => setActiveSection('skills')}
-          backgroundColor={activeSection === 'skills' ? '#667eea' : '#ccc'}
+          backgroundColor={activeSection === 'skills' ? 'var(--primary)' : '#e2e8f0'}
         />
         <Button
           label="Resources"
           onClick={() => setActiveSection('resources')}
-          backgroundColor={activeSection === 'resources' ? '#667eea' : '#ccc'}
+          backgroundColor={activeSection === 'resources' ? 'var(--primary)' : '#e2e8f0'}
         />
         <Button
           label="Dev Setup"
           onClick={() => setActiveSection('setup')}
-          backgroundColor={activeSection === 'setup' ? '#667eea' : '#ccc'}
+          backgroundColor={activeSection === 'setup' ? 'var(--primary)' : '#e2e8f0'}
         />
       </Navigation>
 
